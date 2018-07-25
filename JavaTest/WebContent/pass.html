@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<title>密码生成</title>
+</head>
+<body>
+
+<div style="margin: 20px;">
+用户画像又称用户角色，作为一种勾画目标用户、联系用户诉求与设计方向的有效工具，用户画像在各领域得到了广泛的应用。我们在实际操作的过程中往往会以最为浅显和贴近生活的话语将用户的属性、行为与期待联结起来。作为实际用户的虚拟代表，用户画像所形成的用户角色并不是脱离产品和市场之外所构建出来的，形成的用户角色需要有代表性能代表产品的主要受众和目标群体。
+	<br />
+	<br />
+	<input type="text" id="pass" />
+	<input type="number" id="length" />
+	<br />
+	<input type="button" style="width: 100px;height: 35px;" value="生成" onclick="document.getElementById('pass').value=genEnCode(parseInt(document.getElementById('length').value),'1','1','1','1','1');document.getElementById('pass').focus();document.getElementById('pass').select()" />
+</div>
+<script>
+/**
+ * 生成密码字符串
+ * 33~47：!~/
+ * 48~57：0~9
+ * 58~64：:~@
+ * 65~90：A~Z
+ * 91~96：[~`
+ * 97~122：a~z
+ * 123~127：{~ 
+ * @param length 长度
+ * @param hasNum 是否包含数字 1-包含 0-不包含
+ * @param hasChar 是否包含字母 1-包含 0-不包含
+ * @param hasSymbol 是否包含其他符号 1-包含 0-不包含
+ * @param caseSense 是否大小写敏感 1-敏感 0-不敏感
+ * @param lowerCase 是否只需要小写，只有当hasChar为1且caseSense为0时起作用 1-全部小写 0-全部大写
+ */
+function genEnCode(length, hasNum, hasChar, hasSymbol, caseSense, lowerCase) {
+    var m = "";
+    if (hasNum == "0" && hasChar == "0" && hasSymbol == "0") return m;
+    for (var i = length; i > 0; i--) {
+        var num = Math.floor((Math.random() * 94) + 33);
+        if (
+            (
+                (hasNum == "0") && ((num >= 48) && (num <= 57))
+            ) || (
+                (hasChar == "0") && ((
+                    (num >= 65) && (num <= 90)
+                ) || (
+                    (num >= 97) && (num <= 122)
+                ))
+            ) || (
+                (hasSymbol == "0") && ((
+                    (num >= 33) && (num <= 47)
+                ) || (
+                    (num >= 58) && (num <= 64)
+                ) || (
+                    (num >= 91) && (num <= 96)
+                ) || (
+                    (num >= 123) && (num <= 127)
+                ))
+            )
+        ) {
+            i++;
+            continue;
+        }
+        m += String.fromCharCode(num);
+    }
+    if(caseSense == "0"){
+        m = (lowerCase == "0")?m.toUpperCase():m.toLowerCase();
+    }
+    return m;
+}
+document.getElementById('pass').onfocus = function(){
+	this.select();
+};
+</script>
+
+</body>
+</html>
