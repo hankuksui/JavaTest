@@ -2,7 +2,7 @@ package base;
 
 public class Base64Test
 {
-	private static String str = "1,这是一个测试！!@#$%^&*()+_[]:\"|\\{}';,./?><`~'";
+	private static String str = "1,这是一个测试！!@#$%^&*()+_[]:\"|\\{}';,./?><`~'垃圾eclipse插件";
 	
 	public static void main(String[] args)
 	{
